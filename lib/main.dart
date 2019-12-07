@@ -34,7 +34,22 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  
+                  CircleAvatar(
+                    radius: MediaQuery.of(context).size.height / 16,
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage('assets/dash.png'),
+                      radius: MediaQuery.of(context).size.height / 20,
+                    ),
+                  ),
+                  Text(
+                    'MY SANTA´S LIST',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.share),
+                    iconSize: 40,
+                    onPressed: () {},
+                  )
                 ],
               ),
             ),
