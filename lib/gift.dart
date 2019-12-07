@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-// final String img;
-// final String nameGift;
-
-// Gift({this.img, this.nameGift});
-
-/*  
- */
 
 class Gift extends StatelessWidget {
+  final String img;
+  final String nameGift;
+
+  Gift({this.img, this.nameGift});
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -19,7 +16,7 @@ class Gift extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
                 image: NetworkImage(
-                    'https://elpais.com/tecnologia/imagenes/2017/09/19/actualidad/1505815835_481570_1505909612_noticia_fotograma.jpg'),
+                    img),
                 fit: BoxFit.fill),
           ),
         ),
@@ -39,7 +36,7 @@ class Gift extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Text(
-                  'Apple watch',
+                  nameGift,
                   style: TextStyle(fontSize: 30, color: Colors.white, fontWeight: FontWeight.bold),
                 ),
               )
