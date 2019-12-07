@@ -29,9 +29,14 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-           Container(
-              height: MediaQuery.of(context).size.height / 3,
-              color: Colors.red,
+            Container(
+              height: MediaQuery.of(context).size.height / 5,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  
+                ],
+              ),
             ),
           ],
         ),
