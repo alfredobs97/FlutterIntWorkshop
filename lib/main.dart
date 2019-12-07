@@ -23,6 +23,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  ImageIcon gift = ImageIcon(
+    AssetImage('assets/gift-transparent.png'),
+    size: 20.0,
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,8 +95,13 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        child: gift,
+        elevation: 12.0,
+        backgroundColor: Colors.red,
         onPressed: () {},
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.centerFloat, // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
