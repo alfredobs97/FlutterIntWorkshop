@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'gift.dart';
+import 'shop.dart';
 
 void main() => runApp(MyApp());
 
@@ -110,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: gift,
         elevation: 12.0,
         backgroundColor: Colors.red,
-        onPressed: () {},
+        onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Shop()));},
       ),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.centerFloat, // This trailing comma makes auto-formatting nicer for build methods.
