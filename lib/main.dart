@@ -53,6 +53,42 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
+            Expanded(
+              child: ListView(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(40)),
+                        child: Container(
+                        height: MediaQuery.of(context).size.height / 4,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(40)),
+                        child: Container(
+                        height: MediaQuery.of(context).size.height / 4,
+                        color: Colors.green,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(40)),
+                        child: Container(
+                        height: MediaQuery.of(context).size.height / 4,
+                        color: Colors.limeAccent,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
