@@ -27,31 +27,40 @@ class _ShopState extends State<Shop> {
 
     return gifts;
   }
+
+  void initState() {
+    super.initState();
+    getGifts().then((gifts) {
+      widget.myGifts = gifts;
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('SANTA´S GIFT BAG'),
-          centerTitle: true,
-        ),
-        body: GridView.count(
-          crossAxisCount: 2,
-          children: <Widget>[
-            MiniGift(
-              img:
-                  "https://lamanzanamordida.net/app/uploads-lamanzanamordida.net/2019/11/Captura-de-pantalla-2019-11-13-a-las-14.45.05.png",
-              nameGift: 'Macbook pro',
-              addGift: widget.addGift,
-              removeGift: widget.removeGift,
-            ),
-            MiniGift(
-              img:
-                  "https://lamanzanamordida.net/app/uploads-lamanzanamordida.net/2019/11/Captura-de-pantalla-2019-11-13-a-las-14.45.05.png",
-              nameGift: 'Macbook pro',
-              addGift: widget.addGift,
-              removeGift: widget.removeGift,
-            ),
-          ],
-        ));
+      appBar: AppBar(
+        title: Text('SANTA´S GIFT BAG'),
+        centerTitle: true,
+      ),
+      body: Center(
+          child: widget.myGifts.length < 1
+              ? CircularProgressIndicator()
+              : GridView.builder(
+                  itemCount: widget.myGifts.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: EdgeInsets.all(10),
+                      child: MiniGift(
+                        img: widget.myGifts[index].img,
+                        nameGift: widget.myGifts[index].nameGift,
+                        addGift: widget.addGift,
+                        removeGift: widget.removeGift,
+                      ),
+                    );
+                  },
+                )),
+    );
   }
 }
