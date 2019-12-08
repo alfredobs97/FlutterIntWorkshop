@@ -129,7 +129,7 @@ class _MyHomePageState extends State<MyHomePage> {
         elevation: 12.0,
         backgroundColor: Colors.red,
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => Shop()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Shop(addGift: widget.addGift, removeGift: widget.removeGift)));
         },
       ),
       floatingActionButtonLocation:

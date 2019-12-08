@@ -5,7 +5,10 @@ class MiniGift extends StatefulWidget {
   final String img;
   final String nameGift;
 
-  MiniGift({this.img, this.nameGift, this.isSelected});
+  final Function addGift;
+  final Function removeGift;
+
+  MiniGift({this.img, this.nameGift, this.addGift, this.removeGift});
 
   @override
   _MiniGiftState createState() => _MiniGiftState();
@@ -47,6 +50,7 @@ class _MiniGiftState extends State<MiniGift> {
                       color: Colors.white,
                       onPressed: () {
                         setState(() {
+                          widget.isSelected ? widget.removeGift(widget.img, widget.nameGift) : widget.addGift(widget.img, widget.nameGift);
                           widget.isSelected = widget.isSelected ? false : true;
                         });
                       },
