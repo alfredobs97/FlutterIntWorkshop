@@ -1,17 +1,27 @@
 import 'package:flutter/material.dart';
 
 class MiniGift extends StatefulWidget {
-  /* final String img;
-  final String nameGift;
-  bool isSelected;
+  bool isSelected = false;
 
-  MiniGift({this.img, this.nameGift, this.isSelected});   
-  */
+  
+
+    /* 
+    
+    final String img;
+  final String nameGift;
+  MiniGift({this.img, this.nameGift, this.isSelected});
+    
+    widget.isSelected
+                              ? widget.removeGift(widget.img, widget.nameGift)
+                              : widget.addGift(widget.img, widget.nameGift); */
+
   @override
   _MiniGiftState createState() => _MiniGiftState();
 }
 
 class _MiniGiftState extends State<MiniGift> {
+  ImageIcon noSelect = ImageIcon(AssetImage('assets/gift-transparent.png'));
+  ImageIcon select = ImageIcon(AssetImage('assets/gift-fill.png'));
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -40,6 +50,15 @@ class _MiniGiftState extends State<MiniGift> {
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                     ),
+                    IconButton(
+                      icon: widget.isSelected ? select : noSelect,
+                      color: Colors.white,
+                      onPressed: () {
+                        setState(() {
+                          widget.isSelected = widget.isSelected ? false : true;
+                        });
+                      },
+                    )
                   ],
                 ),
               ),
