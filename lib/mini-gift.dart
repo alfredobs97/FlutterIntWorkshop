@@ -2,18 +2,10 @@ import 'package:flutter/material.dart';
 
 class MiniGift extends StatefulWidget {
   bool isSelected = false;
-
-  
-
-    /* 
-    
-    final String img;
+  final String img;
   final String nameGift;
+
   MiniGift({this.img, this.nameGift, this.isSelected});
-    
-    widget.isSelected
-                              ? widget.removeGift(widget.img, widget.nameGift)
-                              : widget.addGift(widget.img, widget.nameGift); */
 
   @override
   _MiniGiftState createState() => _MiniGiftState();
@@ -31,7 +23,7 @@ class _MiniGiftState extends State<MiniGift> {
           Expanded(
             child: ClipRRect(
               borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-              child: Image.network('https://lamanzanamordida.net/app/uploads-lamanzanamordida.net/2019/11/Captura-de-pantalla-2019-11-13-a-las-14.45.05.png', fit: BoxFit.fill),
+              child: Image.network(widget.img, fit: BoxFit.fill),
             ),
           ),
           ClipRRect(
@@ -45,7 +37,7 @@ class _MiniGiftState extends State<MiniGift> {
                   children: <Widget>[
                     Expanded(
                       child: Text(
-                        'Macbook Pro',
+                        widget.nameGift,
                         overflow: TextOverflow.clip,
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),

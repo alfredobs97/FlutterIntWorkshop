@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'mini-gift.dart';
 
 class Shop extends StatefulWidget {
   @override
@@ -16,30 +17,8 @@ class _ShopState extends State<Shop> {
       body: GridView.count(
         crossAxisCount: 2,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              color: Colors.red,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              color: Colors.blue,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              color: Colors.green,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              color: Colors.yellow,
-            ),
-          )
+ MiniGift(img: "https://lamanzanamordida.net/app/uploads-lamanzanamordida.net/2019/11/Captura-de-pantalla-2019-11-13-a-las-14.45.05.png", nameGift: 'Macbook pro', isSelected: false),
+  MiniGift(img: "https://lamanzanamordida.net/app/uploads-lamanzanamordida.net/2019/11/Captura-de-pantalla-2019-11-13-a-las-14.45.05.png", nameGift: 'Macbook pro', isSelected: false),
         ],
       ));
   }
