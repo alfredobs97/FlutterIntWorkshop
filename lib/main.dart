@@ -31,6 +31,23 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
+  List<Gift> gifts = new List();
+
+  void addGift(String img, String nameGift) {
+    print('add');
+    gifts.add(Gift(
+      img: img,
+      nameGift: nameGift,
+    ));
+    print(gifts.length);
+  }
+
+  void removeGift(String img, String nameGift) {
+    print('remove');
+    gifts.removeWhere((gift) => gift.img == img && gift.nameGift == nameGift);
+    print(gifts.length);
+  }
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -111,7 +128,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: gift,
         elevation: 12.0,
         backgroundColor: Colors.red,
-        onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Shop()));},
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Shop()));
+        },
       ),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.centerFloat, // This trailing comma makes auto-formatting nicer for build methods.
