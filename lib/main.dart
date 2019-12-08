@@ -89,36 +89,14 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Expanded(
-              child: ListView(
-                children: <Widget>[
-                  Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Gift(
-                        img:
-                            'https://elpais.com/tecnologia/imagenes/2017/09/19/actualidad/1505815835_481570_1505909612_noticia_fotograma.jpg',
-                        nameGift: 'Apple Watch',
-                      )),
-                  Padding(
+              child: ListView.builder(
+                itemCount: widget.gifts.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(40)),
-                      child: Container(
-                        height: MediaQuery.of(context).size.height / 4,
-                        color: Colors.green,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(40)),
-                      child: Container(
-                        height: MediaQuery.of(context).size.height / 4,
-                        color: Colors.limeAccent,
-                      ),
-                    ),
-                  ),
-                ],
+                    child: Gift(img: widget.gifts[index].img, nameGift: widget.gifts[index].nameGift),
+                  );
+                },
               ),
             )
           ],
@@ -129,7 +107,8 @@ class _MyHomePageState extends State<MyHomePage> {
         elevation: 12.0,
         backgroundColor: Colors.red,
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => Shop(addGift: widget.addGift, removeGift: widget.removeGift)));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Shop(addGift: widget.addGift, removeGift: widget.removeGift)));
         },
       ),
       floatingActionButtonLocation:
