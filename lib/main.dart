@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'gift.dart';
 import 'shop.dart';
+import 'package:share/share.dart';
 
 void main() => runApp(MyApp());
 
@@ -83,7 +84,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   IconButton(
                     icon: Icon(Icons.share),
                     iconSize: 40,
-                    onPressed: () {},
+                    onPressed: () {
+                      String myCard = 'Hola Santa Dash, quiero estos regalos porque he programado muy bien: \n';
+
+                      widget.gifts.forEach((gift) {
+                        myCard += '- ' + gift.nameGift + '\n';
+                      });
+
+                      myCard += '¡Muchas gracias Santa Dash!';
+
+                      Share.share(myCard, subject: 'Correo para Santa Dash');
+                    },
                   )
                 ],
               ),
