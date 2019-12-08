@@ -94,7 +94,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Gift(img: widget.gifts[index].img, nameGift: widget.gifts[index].nameGift),
+                    child: Dismissible(
+                      key: ValueKey(widget.gifts[index]),
+                      background: Container(
+                        color: Colors.red,
+                      ),
+                      onDismissed: (direction) {
+                        setState(() {
+                          widget.gifts.removeAt(index);
+                        });
+                      },
+                      child: Gift(img: widget.gifts[index].img, nameGift: widget.gifts[index].nameGift),
+                    ),
                   );
                 },
               ),
