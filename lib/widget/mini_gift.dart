@@ -21,24 +21,28 @@ class _MiniGiftState extends State<MiniGift> {
   final ImageIcon noSelectedIcon = ImageIcon(AssetImage('assets/gift-transparent.png'));
   final ImageIcon selectedIcon = ImageIcon(AssetImage('assets/gift-fill.png'));
 
+  final double cardBorderRadius = 10;
+
   @override
   Widget build(BuildContext context) {
+
+
     return Card(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
+      elevation: 5,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(cardBorderRadius)
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(cardBorderRadius),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
 
-          Expanded(
-            child: ClipRRect(
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-              child: Image.network(widget.image, fit: BoxFit.fill),
-            ),
-          ),
+            Expanded(child: Image.network(widget.image, fit: BoxFit.cover)),
 
-          ClipRRect(
-            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
-            child: Container(
-              color: Theme.of(context).primaryColor,
+            Container(
+              height: 56,
+              color: const Color(0xFF64B5F6),
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: Row(
@@ -49,7 +53,7 @@ class _MiniGiftState extends State<MiniGift> {
                       child: Text(
                         widget.giftName,
                         overflow: TextOverflow.clip,
-                        style: TextStyle(color: Colors.white, fontSize: 20),
+                        style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w500),
                       ),
                     ),
 
@@ -62,13 +66,10 @@ class _MiniGiftState extends State<MiniGift> {
                 ),
               ),
             ),
-          ),
 
-        ],
+          ],
+        ),
       ),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-      elevation: 10,
-      margin: EdgeInsets.all(10),
     );
   }
 

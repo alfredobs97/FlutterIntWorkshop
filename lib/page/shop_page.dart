@@ -45,23 +45,30 @@ class _ShopPageState extends State<ShopPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('SANTA´S GIFT BAG'),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        title: Text(
+          'SANTA´S GIFT BAG',
+          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, letterSpacing: 1),
+        ),
         centerTitle: true,
       ),
       body: Center(
         child: _shopGift.length < 1
           ? CircularProgressIndicator()
           : GridView.builder(
-          itemCount: _shopGift.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2),
-          itemBuilder: (BuildContext context, int index) {
-            return Padding(
-              padding: EdgeInsets.all(10),
-              child: _shopGift[index],
-            );
-          },
-        )),
+            itemCount: _shopGift.length,
+            padding: EdgeInsets.all(20),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 2/3,
+              mainAxisSpacing: 15,
+              crossAxisSpacing: 15
+            ),
+            itemBuilder: (BuildContext context, int index) {
+              return _shopGift[index];
+            },
+          ),
+      ),
     );
   }
 }
