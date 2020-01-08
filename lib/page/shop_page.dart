@@ -1,45 +1,15 @@
 import 'package:flutter/material.dart';
-import '../widget/mini_gift.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:flutter_interact_workshop/provider/gift_provider.dart';
+import 'package:flutter_interact_workshop/widget/mini_gift_card.dart';
 
 class ShopPage extends StatefulWidget {
-
-  final Function onAddGift;
-  final Function onRemoveGift;
-
-  ShopPage({this.onAddGift, this.onRemoveGift});
-
   @override
   _ShopPageState createState() => _ShopPageState();
 }
 
 class _ShopPageState extends State<ShopPage> {
 
-  List<MiniGift> _shopGift = List();
-
-  Future<List<MiniGift>> getGifts() async {
-    final responseJson = await http.get('http://vps675002.ovh.net:81/getGifts').then((response) => jsonDecode(response.body));
-    List<MiniGift> gifts = List();
-    responseJson.forEach((gift) {
-      gifts.add(MiniGift(
-        image: gift['img'],
-        giftName: gift['name'],
-        onAddGift: widget.onAddGift,
-        onRemoveGift: widget.onRemoveGift,
-      ));
-    });
-
-    return gifts;
-  }
-
-  void initState() {
-    super.initState();
-    getGifts().then((gifts) {
-      _shopGift = gifts;
-      setState(() {});
-    });
-  }
+  GiftProvider _giftProvider = GiftProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -52,23 +22,37 @@ class _ShopPageState extends State<ShopPage> {
         ),
         centerTitle: true,
       ),
-      body: Center(
-        child: _shopGift.length < 1
-          ? CircularProgressIndicator()
-          : GridView.builder(
-            itemCount: _shopGift.length,
-            padding: EdgeInsets.all(20),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 2/3,
-              mainAxisSpacing: 15,
-              crossAxisSpacing: 15
-            ),
-            itemBuilder: (BuildContext context, int index) {
-              return _shopGift[index];
-            },
-          ),
-      ),
+      body: FutureBuilder(
+        future: _giftProvider.getShopGifts(),
+        builder: (context, snapshot) {
+
+          final shopGifts = snapshot.data;
+
+          if(snapshot.hasData) {
+
+            return GridView.builder(
+              itemCount: shopGifts.length,
+              padding: EdgeInsets.all(20),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 2/3,
+                mainAxisSpacing: 15,
+                crossAxisSpacing: 15
+              ),
+              itemBuilder: (BuildContext context, int index) {
+                return MiniGiftCard(
+                  gift: shopGifts[index],
+                  onGiftSelected: (gift) => _giftProvider.addGift(gift),
+                  onGiftUnselected: (gift) => _giftProvider.removeGift(gift),
+                );
+              },
+            );
+
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
+        },
+      )
     );
   }
 }

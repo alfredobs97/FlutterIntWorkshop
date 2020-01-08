@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_interact_workshop/page/shop_page.dart';
-import 'package:flutter_interact_workshop/widget/gift.dart';
+import 'package:flutter_interact_workshop/provider/gift_provider.dart';
+import 'package:flutter_interact_workshop/widget/gift_card.dart';
 import 'package:share/share.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,25 +11,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  List<Gift> _gifts = new List();
+  var _gifts = GiftProvider().myGifts;
 
-  void addGift(String image, String giftName) {
-    print('Gift $giftName added');
-    _gifts.add(Gift(
-      image: image,
-      giftName: giftName,
-    ));
-    print(_gifts.length);
-  }
-
-  void removeGift(String image, String giftName) {
-    print('Gift $giftName removed');
-    _gifts.removeWhere(
-        (gift) => gift.image == image && gift.giftName == giftName);
-    print(_gifts.length);
-  }
-
-  ImageIcon gift = ImageIcon(
+  ImageIcon giftIcon = ImageIcon(
     AssetImage('assets/gift-transparent.png'),
     size: 30.0,
   );
@@ -79,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.all(8.0),
                   child: Dismissible(
                     key: ValueKey(_gifts[index]),
-                    child: _gifts[index],
+                    child: GiftCard(gift: _gifts[index]),
                     background: Container(
                       padding: EdgeInsets.only(right: 20),
                       color: Colors.red,
@@ -104,7 +89,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 20),
         child: FloatingActionButton(
-          child: gift,
+          child: giftIcon,
           elevation: 12.0,
           onPressed: _goToShopPage,
         ),
@@ -115,8 +100,7 @@ class _HomePageState extends State<HomePage> {
 
   _goToShopPage() {
     Navigator.push(context,
-      MaterialPageRoute( builder: (context) =>
-                ShopPage(onAddGift: addGift, onRemoveGift: removeGift)));
+      MaterialPageRoute( builder: (context) => ShopPage()));
   }
 
   _shareGifts() {
@@ -124,7 +108,7 @@ class _HomePageState extends State<HomePage> {
         'Hola Santa Dash, quiero estos regalos porque he programado muy bien: \n';
 
     _gifts.forEach((gift) {
-      myCard += '- ' + gift.giftName + '\n';
+      myCard += '- ' + gift.name + '\n';
     });
 
     myCard += '¡Muchas gracias Santa Dash!';

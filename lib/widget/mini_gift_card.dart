@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_interact_workshop/model/gift.dart';
+import 'package:flutter_interact_workshop/provider/gift_provider.dart';
 
-class MiniGift extends StatefulWidget {
+typedef GiftCardAction = void Function(Gift gift);
 
-  final String image;
-  final String giftName;
+class MiniGiftCard extends StatefulWidget {
 
-  final Function onAddGift;
-  final Function onRemoveGift;
+  final Gift gift;
 
-  MiniGift({this.image, this.giftName, this.onAddGift, this.onRemoveGift});
+  final GiftCardAction onGiftSelected;
+  final GiftCardAction onGiftUnselected;
+
+  MiniGiftCard({this.gift, this.onGiftSelected, this.onGiftUnselected});
 
   @override
-  _MiniGiftState createState() => _MiniGiftState();
+  _MiniGiftCardState createState() => _MiniGiftCardState();
 }
 
-class _MiniGiftState extends State<MiniGift> {
+class _MiniGiftCardState extends State<MiniGiftCard> {
 
-  bool _isSelected = false;
+  bool _isSelected;
 
   final ImageIcon noSelectedIcon = ImageIcon(AssetImage('assets/gift-transparent.png'));
   final ImageIcon selectedIcon = ImageIcon(AssetImage('assets/gift-fill.png'));
@@ -24,8 +27,13 @@ class _MiniGiftState extends State<MiniGift> {
   final double cardBorderRadius = 10;
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+    _isSelected = GiftProvider().hasGift(widget.gift);
+  }
 
+  @override
+  Widget build(BuildContext context) {
 
     return Card(
       elevation: 5,
@@ -38,7 +46,7 @@ class _MiniGiftState extends State<MiniGift> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
 
-            Expanded(child: Image.network(widget.image, fit: BoxFit.cover)),
+            Expanded(child: Image.network(widget.gift.image, fit: BoxFit.cover)),
 
             Container(
               height: 56,
@@ -51,7 +59,7 @@ class _MiniGiftState extends State<MiniGift> {
 
                     Expanded(
                       child: Text(
-                        widget.giftName,
+                        widget.gift.name,
                         overflow: TextOverflow.clip,
                         style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w500),
                       ),
@@ -75,7 +83,7 @@ class _MiniGiftState extends State<MiniGift> {
 
   _selectPressed() {
     setState(() {
-      _isSelected ? widget.onRemoveGift(widget.image, widget.giftName) : widget.onAddGift(widget.image, widget.giftName);
+      _isSelected ? widget.onGiftUnselected(widget.gift) : widget.onGiftSelected(widget.gift);
       _isSelected = !_isSelected;
     });
   }

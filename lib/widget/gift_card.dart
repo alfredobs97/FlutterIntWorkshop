@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_interact_workshop/model/gift.dart';
 
-class Gift extends StatelessWidget {
+class GiftCard extends StatelessWidget {
 
-  final String image;
-  final String giftName;
+  final Gift gift;
 
-  Gift({this.image, this.giftName});
+  GiftCard({this.gift});
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +20,8 @@ class Gift extends StatelessWidget {
           height: containerHeight,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage(image),
-              fit: BoxFit.fill,
+              image: NetworkImage(gift.image),
+              fit: BoxFit.cover,
             ),
           ),
           foregroundDecoration: BoxDecoration(
@@ -29,7 +29,7 @@ class Gift extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               stops: [0.4, 1],
-              colors: [Colors.blueGrey.withOpacity(0.1), Theme.of(context).primaryColor]),
+              colors: [Colors.blueGrey.withOpacity(0.1), const Color(0xFF64B5F6)]),
           ),
         ),
 
@@ -39,7 +39,7 @@ class Gift extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Text(
-              giftName,
+              gift.name,
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.white,
