@@ -30,79 +30,84 @@ class _HomePageState extends State<HomePage> {
 
   ImageIcon gift = ImageIcon(
     AssetImage('assets/gift-transparent.png'),
-    size: 20.0,
+    size: 30.0,
   );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
+      body: Column(
+        children: <Widget>[
 
-            Container(
-              height: MediaQuery.of(context).size.height / 5,
+          SafeArea(
+            bottom: false,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
 
                   CircleAvatar(
-                    radius: MediaQuery.of(context).size.height / 16,
+                    radius: 38,
                     child: CircleAvatar(
                       backgroundImage: AssetImage('assets/dash.png'),
-                      radius: MediaQuery.of(context).size.height / 20,
+                      radius: 29,
                     ),
                   ),
 
                   Text(
                     'MY SANTA´S LIST',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, letterSpacing: 1),
                   ),
 
                   IconButton(
                     icon: Icon(Icons.share),
-                    iconSize: 40,
+                    iconSize: 30,
                     onPressed: _shareGifts,
                   )
                 ],
               ),
             ),
+          ),
 
-            Expanded(
-              child: ListView.builder(
-                itemCount: _gifts.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Dismissible(
-                      key: ValueKey(_gifts[index]),
-                      child: _gifts[index],
-                      background: Container(
-                        padding: EdgeInsets.only(right: 20),
-                        color: Colors.red,
-                        alignment: Alignment.centerRight,
-                        child: Text('Eliminar',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                          ),
+          Expanded(
+            child: ListView.builder(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              itemCount: _gifts.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Dismissible(
+                    key: ValueKey(_gifts[index]),
+                    child: _gifts[index],
+                    background: Container(
+                      padding: EdgeInsets.only(right: 20),
+                      color: Colors.red,
+                      alignment: Alignment.centerRight,
+                      child: Text('Eliminar',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      onDismissed: (direction) => setState(() => _gifts.removeAt(index)),
                     ),
-                  );
-                },
-              ),
-            )
-          ],
-        ),
+                    onDismissed: (direction) => setState(() => _gifts.removeAt(index)),
+                  ),
+                );
+              },
+            ),
+          ),
+
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        child: gift,
-        elevation: 12.0,
-        backgroundColor: Colors.red,
-        onPressed: _goToShopPage,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 20),
+        child: FloatingActionButton(
+          child: gift,
+          elevation: 12.0,
+          onPressed: _goToShopPage,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
